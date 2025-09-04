@@ -1,0 +1,32 @@
+{
+  "stocks": [
+    {
+      "id": 1,
+      "name": "Tesla",
+      "symbol": "TSLA",
+      "quantity": 5,
+      "avgPrice": 250.50,
+      "currentPrice": 275.25,
+      "history": [250, 255, 252, 260, 270, 275, 275.25]
+    },
+    {
+      "id": 2,
+      "name": "Amazon",
+      "symbol": "AMZN",
+      "quantity": 10,
+      "avgPrice": 120.00,
+      "currentPrice": 115.75,
+      "history": [120, 118, 116, 117, 115, 116, 115.75]
+    },
+    {
+      "id": 3,
+      "name": "Apple",
+      "symbol": "AAPL",
+      "quantity": 8,
+      "avgPrice": 180.20,
+      "currentPrice": 185.90,
+      "history": [180, 182, 185, 184, 186, 185.9]
+    }
+  ],
+  "transactions": []
+}

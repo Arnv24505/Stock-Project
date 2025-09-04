@@ -7,12 +7,12 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 const App = () => {
   const router = createBrowserRouter([
     {
-      path: '/login',
+      path: '/',
       element: <LoginForm/>
     },
     {
       path: '/user',
-      element: <UserDashboard />
+      element: <UserDashboard userId={1}/>
     }
   ])
   return (

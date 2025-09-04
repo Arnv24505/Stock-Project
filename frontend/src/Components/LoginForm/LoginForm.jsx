@@ -3,31 +3,67 @@ import React, { useState } from "react";
 const AuthPage = () => {
   const [isLogin, setIsLogin] = useState(true);
 
-  const [loginData, setLoginData] = useState({ username: "", password: "" });
+  const [loginData, setLoginData] = useState({ email: "", password: "" });
   const [signupData, setSignupData] = useState({
     fullName: "",
     email: "",
     password: "",
   });
 
-  const handleLoginSubmit = (e) => {
+  const handleLoginSubmit = async (e) => {
     e.preventDefault();
-    if (!loginData.username || !loginData.password) {
-      alert("Please fill all fields");
-      return;
+    try {
+      const response = await fetch('http://localhost:8080/api/auth/login',{
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify(loginData),
+      });
+
+      if (!loginData.username || !loginData.password) {
+        alert("Please fill all fields");
+        return;
+      }
+      if(response.ok){
+        console.log("Logging in:", loginData);
+        alert("Login successful (mock)");
+      }
+      else{
+        const error = await response.text();
+        alert(`Login failed: ${error}`)
+      }
     }
-    console.log("Logging in:", loginData);
-    alert("Login successful (mock)");
+    catch (error) {
+      console.error("Login error:", error)
+      alert("An error occurred during login. Please try again.");
+    }
   };
 
-  const handleSignupSubmit = (e) => {
+  const handleSignupSubmit = async (e) => {
     e.preventDefault();
-    if (!signupData.fullName || !signupData.email || !signupData.password) {
-      alert("Please fill all fields");
-      return;
+    try
+    {
+      const response = await fetch("http://localhost:8080/api/auth/signup", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(signupData),
+      });
+
+      if (!signupData.fullName || !signupData.email || !signupData.password) {
+        alert("Please fill all fields");
+        return;
+      }
+      if (response.ok){
+        alert("Signup successful")
+        setIsLogin(true)
+      }
+      else{
+        const error = await response.text();
+        alert(`Signup failed: ${error}`);
+      }
+    } catch (error) {
+      console.error("Signup error:", error);
+      alert("An error occurred during signup.");
     }
-    console.log("Signing up:", signupData);
-    alert("Signup successful (mock)");
   };
 
   return (
